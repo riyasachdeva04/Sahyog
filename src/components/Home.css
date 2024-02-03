@@ -1,0 +1,25 @@
+.home{
+    background-color: black;
+}
+@font-face {
+    font-family: 'RobotoSlab';
+    src: url('../../assets/fonts/RobotoSlab-VariableFont_wght.ttf');
+}
+
+/* Common styles for both mobile and desktop */
+.container {
+    height: 100vh;
+}
+  
+/* Styles for mobile screens */
+@media (max-width: 767px) {
+.desktop {
+    display: none;
+}
+}
+
+/* Styles for desktop screens */
+@media (min-width: 768px) {
+
+}
+  
