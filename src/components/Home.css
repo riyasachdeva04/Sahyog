@@ -10,7 +10,6 @@
 .container {
     height: 100vh;
 }
-  
 /* Styles for mobile screens */
 @media (max-width: 767px) {
 .desktop {
