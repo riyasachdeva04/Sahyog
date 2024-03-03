@@ -7,6 +7,7 @@ import {
 } from "react-router-dom";
 import Login from './components/Login';
 import Shop from './components/Shop';
+import Language from './components/Language';
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
     <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/shop" element={<Shop />} />
+          <Route path="/languages" element={<Language />} />
           <Route path="/search" element={<Home />} />
           <Route path="/login" element={<Login/>} />
     </Routes>
