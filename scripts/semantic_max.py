@@ -1,6 +1,7 @@
+import csv
 import heapq
 import graph
-
+import pandas as pd
 def dijkstra_longest_path(graph, src, dst):
    
     distances = {node: 0 for node in graph}  
@@ -33,11 +34,38 @@ def dijkstra_longest_path(graph, src, dst):
                
     return -float("inf"), []
 
-src = 'Bengali'
-dst = 'Marathi'
-# Print longest path    
-length, path = dijkstra_longest_path(graph.G, src, dst)
-print(length)
-print(path)
+with open('./translation/top_similar_languages.csv', 'r') as file1:
+    reader = csv.reader(file1)
+    df = pd.read_csv('./translation/sorted_scores.csv')
+
+    # Skip the header row if present
+    next(reader)
+
+    # Create a set of languages from the first column
+    languages = set(row[1] for row in reader)
+
+    # Iterate over all language pairs
+    for src_lang in languages:
+        for dest_lang in languages - {src_lang}:
+            # Call the dijkstra_longest_path function with the current language pair
+            src = src_lang
+            dst = dest_lang
+
+            desired_row = df.loc[(df['Column1'] == src) & (df['Column2'] == dst)]
+            direct_val = desired_row['Sum of Function Results'].values[0]
+
+            length, path = dijkstra_longest_path(graph.G, src, dst)
+            print(f"Source: {src}, Destination: {dst}")
+            print(f"Longest path length: {length}")
+            print(f"Longest path: {' -> '.join(path)}")
+
+            diff = length - direct_val
+            sum = 0
+            i = 0
+            if(diff > 0):
+                sum += diff
+                i += 1
+print(f"Average: {sum/i}")
+            
 
 
