@@ -45,6 +45,8 @@ with open('./translation/top_similar_languages.csv', 'r') as file1:
     languages = set(row[1] for row in reader)
 
     # Iterate over all language pairs
+    sum = 0
+    i = 0
     for src_lang in languages:
         for dest_lang in languages - {src_lang}:
             # Call the dijkstra_longest_path function with the current language pair
@@ -55,17 +57,18 @@ with open('./translation/top_similar_languages.csv', 'r') as file1:
             direct_val = desired_row['Sum of Function Results'].values[0]
 
             length, path = dijkstra_longest_path(graph.G, src, dst)
-            print(f"Source: {src}, Destination: {dst}")
-            print(f"Longest path length: {length}")
-            print(f"Longest path: {' -> '.join(path)}")
-
+            
             diff = length - direct_val
-            sum = 0
-            i = 0
+            
             if(diff > 0):
+                print(f"Source: {src}, Destination: {dst}")
+                print(f"Longest path length: {length}")
+                print(f"Longest path: {' -> '.join(path)}")
+                print(direct_val)
                 sum += diff
                 i += 1
-print(f"Average: {sum/i}")
+
+    print(f"Average: {sum/i}")
             
 
 
